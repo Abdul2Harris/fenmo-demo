@@ -1,5 +1,5 @@
 'use client';
-import { RefreshCw, BarChart2, Settings } from 'lucide-react';
+import { RefreshCw } from 'lucide-react';
 
 const navItems = [
   { icon: RefreshCw, label: 'Reconcile', active: true },

@@ -1,6 +1,6 @@
 export async function askFinanceAgent(
   question: string,
-  transactions: { bank: any[]; ledger: any[] }
+  transactions: { bank: Record<string, unknown>[]; ledger: Record<string, unknown>[] }
 ) {
   const context = JSON.stringify(transactions, null, 2);
 

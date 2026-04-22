@@ -16,8 +16,8 @@ export async function POST(req: NextRequest) {
   const bankText = await bankFile.text();
   const ledgerText = await ledgerFile.text();
 
-  const bankRows = Papa.parse(bankText, { header: true, skipEmptyLines: true }).data as any[];
-  const ledgerRows = Papa.parse(ledgerText, { header: true, skipEmptyLines: true }).data as any[];
+  const bankRows = Papa.parse<Record<string, string>>(bankText, { header: true, skipEmptyLines: true }).data;
+  const ledgerRows = Papa.parse<Record<string, string>>(ledgerText, { header: true, skipEmptyLines: true }).data;
 
   // Save to DB
   await prisma.reconciliationResult.deleteMany();
