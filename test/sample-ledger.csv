@@ -1,0 +1,6 @@
+date,amount,vendor,invoice_number
+2024-01-15,5000,Acme Corp,INV-001
+2024-01-16,2300,ABC Solutions,INV-002
+2024-01-18,8750,GlobalTech Ltd,INV-003
+2024-01-19,3300,MNO Supplies,INV-004
+2024-01-25,9900,Zeta Corp,INV-005

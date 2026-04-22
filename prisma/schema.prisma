@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model BankTransaction {
+  id                   String                @id @default(cuid())
+  date                 String
+  description          String
+  amount               Float
+  reference            String?
+  matched              Boolean               @default(false)
+  createdAt            DateTime              @default(now())
+  reconciliationResult ReconciliationResult?
+}
+
+model LedgerEntry {
+  id                   String                @id @default(cuid())
+  date                 String
+  vendor               String
+  amount               Float
+  invoiceNumber        String?
+  matched              Boolean               @default(false)
+  createdAt            DateTime              @default(now())
+  reconciliationResult ReconciliationResult?
+}
+
+model ReconciliationResult {
+  id          String           @id @default(cuid())
+  bankId      String?          @unique
+  ledgerId    String?          @unique
+  confidence  String           // "exact", "fuzzy", "unmatched_bank", "unmatched_ledger"
+  note        String?
+  createdAt   DateTime         @default(now())
+  bank        BankTransaction? @relation(fields: [bankId], references: [id])
+  ledger      LedgerEntry?     @relation(fields: [ledgerId], references: [id])
+}
